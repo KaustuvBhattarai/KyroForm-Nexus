@@ -11,6 +11,8 @@
 
 **Live Demo**: [KyroForm on Hugging Face Spaces](https://huggingface.co/spaces/kr1nzl3r/KyroForm)
 
+![Description](pynbs/explorer.png)
+
 ## Project Overview
 
 Kyroform AI is a computational framework designed to predict novel protein-protein interactions (PPIs) between the human host and gut microbiome proteins, with a focus on autoimmune diseases such as Systemic Lupus Erythematosus (SLE). This project was developed as the major final-year project for the Department of Computer Engineering at Kathmandu Engineering College, Tribhuvan University.
