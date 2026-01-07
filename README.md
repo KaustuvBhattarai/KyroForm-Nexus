@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo_circ.png" alt="Kyroform AI Logo" width="150"/>
+  <img src="assets/logo_circle.png" alt="Kyroform AI Logo" width="150"/>
 </p>
 # Kyroform AI: Predicting Novel Gut Microbiome-Host Protein-Protein Interactions (PPIs) in Autoimmune Diseases Using Multi-Omics and Heterogeneous Graph Neural Networks (HGNN)
 
