@@ -1,0 +1,4 @@
+
+All files in this folder are used for illustrative and functional purposes in the KyroForm project.  
+Some assets may be sourced from third-party providers; please verify licenses if you plan to redistribute or reuse them.  
+The KyroForm team does not claim ownership of third-party assets unless explicitly stated.
