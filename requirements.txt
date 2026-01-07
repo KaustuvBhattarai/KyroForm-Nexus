@@ -1,0 +1,15 @@
+streamlit==1.31.1
+torch==2.1.2
+torch-geometric==2.4.0
+torch-scatter
+torch-sparse
+torch-cluster
+torch-spline-conv
+
+numpy
+pandas
+scikit-learn
+networkx
+plotly
+requests
+Pillow
