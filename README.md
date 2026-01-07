@@ -173,9 +173,9 @@ Sample predictions:
 Training log (example):
 - Epoch 200 | Loss: 0.1234 | Val AUC: 0.9245
 
-[Screenshot of Training Log] (pynbs/training-log.png) <!-- Placeholder -->
+![Screenshot of Training Log] (pynbs/training-log.png) <!-- Placeholder -->
 
-[Screenshot of Explorer GUI] (pynbs/explorer.png) <!-- Placeholder -->
+![Screenshot of Explorer GUI] (pynbs/explorer.png) <!-- Placeholder -->
 
 
 ## License
