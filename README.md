@@ -23,7 +23,7 @@ The project culminates in a deployable ML model and an interactive web-based "Gu
 
 ### Key Features
 - **PPI Prediction Model**: Trained on 16M+ high-confidence gut–host protein–protein interactions from a 2025 structure-based deep learning dataset.
-- **Heterogeneous Graph Neural Network**: Built using PyTorch Geometric (SAGEConv) for link prediction, achieving ~0.92 validation AUC.
+- **Heterogeneous Graph Neural Network**: Built using PyTorch Geometric (SAGEConv) for link prediction, achieving ~0.897 validation AUC.
 - **Protein Embeddings**: Utilizes ESM-2 (650M parameters) for rich sequence-level representations.
 - **Interactive Explorer**:  
   - Select human and bacterial proteins to predict interaction probabilities  
