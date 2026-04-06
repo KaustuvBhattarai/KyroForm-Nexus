@@ -11,7 +11,7 @@
   <img src="assets/logo_circle.png" alt="Kyroform AI Logo" width="150"/>
 </p>
 
-![Description](pynbs/explorer.png)
+![Description](assets/manual.png)
 
 ## Project Overview
 
@@ -22,12 +22,52 @@ The system integrates multi-omics data (metagenomics, metaproteomics, host trans
 The project culminates in a deployable ML model and an interactive web-based "Gut-Host Interactome Explorer" for visualizing and exploring predicted interactions. This tool has potential applications in biomarker discovery and personalized medicine for autoimmune conditions.
 
 ### Key Features
-- **PPI Prediction Model**: Trained on 16M+ high-confidence predicted gut-host PPIs from a 2025 structure-based DL dataset.
-- **Heterogeneous Graph Neural Network**: Uses PyTorch Geometric with SAGEConv for link prediction, achieving validation AUC ~0.92 (from training logs).
-- **Protein Embeddings**: ESM-2 (650M parameters) for high-quality sequence representations.
-- **Interactive Explorer**: Streamlit app for manual/random predictions, network visualization, similarity analysis, and sequence highlighting.
-- **Calibration & Controls**: Built-in confidence calibration and negative controls for reliable predictions.
-- **SLE Focus**: Prioritized on Systemic Lupus Erythematosus, with potential extensions to IBD, RA, and T1D.
+- **PPI Prediction Model**: Trained on 16M+ high-confidence gut–host protein–protein interactions from a 2025 structure-based deep learning dataset.
+- **Heterogeneous Graph Neural Network**: Built using PyTorch Geometric (SAGEConv) for link prediction, achieving ~0.92 validation AUC.
+- **Protein Embeddings**: Utilizes ESM-2 (650M parameters) for rich sequence-level representations.
+- **Interactive Explorer**:  
+  - Select human and bacterial proteins to predict interaction probabilities  
+  - Supports both manual input and random sampling  
+
+- **Network Visualization**: Displays STRING-derived neighbors alongside predicted interaction edges.
+- **3D Structure Viewer**: Integrated with AlphaFold DB for structural inspection of proteins.
+- **Explainable AI (XAI)**: Includes saliency mapping and latent space analysis for model interpretability.
+- **Similarity Analysis**: Enables comparison of protein embeddings and functional proximity.
+- **Sequence Highlighting**: Visualizes important regions contributing to predictions.
+- **Calibration & Controls**: Incorporates confidence calibration and negative controls for robust, reliable predictions.
+- **Disease Context Module**: Focused on Systemic Lupus Erythematosus (SLE), with gene filtering and extensibility to IBD, RA, and T1D.
+
+### New updates 
+- **Interactive Interactome Explorer** : Select specific human and bacterial proteins to generate real-time interaction probabilities. The interface provides a unified view of biological identity and predicted binding affinity.
+
+- **Multi-Omics Latent Analysis & XAI** : Understand the "why" behind every prediction. This module compares latent space contributions and provides explainable AI (XAI) insights into the model's decision-making process.
+
+- **3D Structure & Network Integration** : Visualize the physical basis of interactions with AlphaFold DB 3D structural previews. Explore the local interaction network including STRING neighbors and predicted edges using our interactive graph engine.
+
+
+## Project Structure
+
+```
+kyroform-nexus/
+├── README.md
+├── requirements.txt
+├── main.py                  # Main Streamlit application
+│
+├── src/kyroform/           # Core ML modules
+│   ├── inference.py        # Model inference engine
+│   ├── state_manager.py    # Session state management
+│   └── utils.py           # API utilities (UniProt, STRING, AlphaFold)
+│
+├── outputs/
+│   ├── figures/            # Visualizations
+│   └── models/             # Trained model & embeddings
+│
+├── notebooks/              # Analysis notebooks
+│   └── Kyroformv1.ipynb
+│
+└── data/                   # Raw datasets
+    └── raw/
+```
 
 ## Installation
 
@@ -38,8 +78,8 @@ The project culminates in a deployable ML model and an interactive web-based "Gu
 ### Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/kyroform-ai.git
-   cd kyroform-ai
+   git clone https://github.com/KaustuvBhattarai/KyroForm-Nexus.git
+   cd KyroForm-Nexus
    ```
 
 2. Install dependencies:
@@ -47,59 +87,12 @@ The project culminates in a deployable ML model and an interactive web-based "Gu
    pip install -r requirements.txt
    ```
 
-   Sample `requirements.txt`:
-   ```
-   torch
-   torch-geometric
-   transformers
-   streamlit
-   pandas
-   numpy
-   networkx
-   plotly
-   scikit-learn
-   pillow
-   requests
-   ```
-
-3. Download required files (embeddings and model):
-   - Place `esm2_embeddings_1143_proteins.pkl` and `kyroform_trained_model_final.pth` in the root folder (download from your trained files or project releases).
-
 4. Run the explorer:
    ```bash
-   streamlit run explorer.py
+   streamlit run main.py
    ```
    Open in browser: http://localhost:8501
 
-## Usage
-
-### Gut-Host Interactome Explorer (GUI)
-The app provides an intuitive interface for PPI prediction:
-
-- **Manual Prediction**: Select human and bacterial UniProt IDs from dropdowns. Click "Predict Interaction" to get probability, similarity metrics, sequence highlights, and UniProt details.
-- **Network Visualization**: Interactive graph showing the predicted pair, STRING neighbors, with edge strengths and hovers.
-- **Details Tab**: Embedding similarities, latent contributions, confidence calibration histogram, negative controls, and sequence highlights (signal peptides, transmembrane regions, low-complexity).
-
-[Screenshot of Manual Prediction Tab] (assets/manual.png) <!-- Placeholder; add actual screenshot -->
-
-[Screenshot of Network Tab] (assets/comp.png) <!-- Placeholder -->
-
-[Screenshot of Details Tab] (assets/struct.png) <!-- Placeholder -->
-
-
-### Command-Line Prediction (Optional)
-Use `kyroform_predict.py` for quick CLI tests:
-
-```bash
-python kyroform_predict.py
-```
-
-It loads the model/embeddings and predicts on 10 random pairs + a known positive.
-
-Sample output:
-```
-Q5TCU3 — A0A0J6C625 → Probability: 0.7088 (Positive)
-```
 
 ### Training the Model (Advanced)
 If you want to retrain:
@@ -114,14 +107,6 @@ If you want to retrain:
 - **Link**: [Zenodo DOI: 10.5281/zenodo.14780446](https://doi.org/10.5281/zenodo.14780446) — `Healty_Bac_predictions.zip` (419 MB)
 - **Details**: 16M+ interactions (probability ≥0.99) between ~19k human proteins and gut bacterial proteins. Distributed as per-protein JSON files (human UniProt ID with list of bacterial partners and scores).
 - **Processing**: Aggregated all JSONs into CSV (16M+ edges), sampled 1000 positives + 3000 negatives for training.
-
-### Alternative Datasets Considered
-- **IntAct**: Host-pathogen PPIs (experimental, small inter-species coverage). Downloaded full MITAB, filtered human-bacteria.
-- **STRING**: Predicted inter-species links (homology-based, used for neighbors in explorer). Downloaded human + Bacteroides files.
-- **HPIDB**: Curated host-pathogen interactions (small, pathogen-focused).
-- **GEO/SRA/PRIDE**: Multi-omics SLE cohorts for future extensions (e.g., GSE112087 metagenomics, GSE139358 transcriptomics).
-
-All processing scripts (download, aggregation, sampling, negatives) are in the repo's `scripts/` folder.
 
 ## Methodology and Process
 
@@ -173,8 +158,6 @@ Training log (example):
 
 ![Screenshot of Training Log] (pynbs/training-log.png) <!-- Placeholder -->
 
-![Screenshot of Explorer GUI] (pynbs/explorer.png) <!-- Placeholder -->
-
 
 ## License
 MIT License — see [LICENSE](LICENSE) for details.
@@ -185,5 +168,13 @@ MIT License — see [LICENSE](LICENSE) for details.
 - PyTorch Geometric team
 - Tribhuvan University & Kathmandu Engineering College
 
+
+## Author
+
+**Kaustuv Bhattarai**  
+Computer Engineering, Tribhuvan University  
+Kathmandu Engineering College
+
+
 Thank you for exploring Kyroform AI!  
-For issues, open a GitHub issue or contact the team. 
+For issues, open a GitHub issue or contact me at meet.kaustuv@gmail.com .
