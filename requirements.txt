@@ -1,4 +1,10 @@
 streamlit==1.31.1
+streamlit-agraph
+streamlit-extras
+hydralit-components
+py3Dmol
+fpdf
+matplotlib
 torch==2.1.2
 torch-geometric==2.4.0
 torch-scatter
